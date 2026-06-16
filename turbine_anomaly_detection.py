@@ -39,7 +39,28 @@ def flag_anomalies(summary: pd.DataFrame) -> pd.DataFrame:
 def main(filepath: str) -> None:
     df = load_telemetry(filepath)
     summary = flag_anomalies(summarise_by_turbine(df))
-    print(summary)
+
+    print("Turbine Health Summary")
+    print(summary.to_string())
+    print()
+
+    failing = summary[summary["requires_maintenance"]]
+    if failing.empty:
+        print("No turbines are currently breaching the anomaly thresholds.")
+        return
+    
+    print(f"URGENT MAINTENANCE REQUIRED: {len(failing)} turbine(s) flagged")
+    for turbine_id, row in failing.iterrows():
+        reasons = []
+        if row["temp_anomaly"]:
+            reasons.append(f"avg temp {row['avg_temperature_c']}C exceeds {TEMP_THRESHOLD_C}C")
+        if row["vibration_anomaly"]:
+            reasons.append(f"peak vibration {row['max_vibration_mm_s']}mm/s exceeds {VIBRATION_THRESHOLD_MM_S}mm/s")
+        print(f"  - {turbine_id}: {', '.join(reasons)}")
+
+
+
+    
 
 
 if __name__ == "__main__":
