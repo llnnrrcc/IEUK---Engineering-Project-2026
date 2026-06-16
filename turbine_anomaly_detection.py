@@ -21,9 +21,18 @@ def load_telemetry(filepath: str) -> pd.DataFrame:
         return pd.read_excel(filepath)
     return pd.read_csv(filepath)
 
+def summarise_by_turbine(df: pd.DataFrame) -> pd.DataFrame:
+    """Aggregate raw readings into one row per turbine."""
+    return df.groupby("turbine_id").agg(
+        avg_temperature_c=("temperature_c", "mean"),
+        max_vibration_mm_s=("vibration_mm_s", "max"),
+        reading_count=("temperature_c", "count"),
+    ).round(2)
+
 def main(filepath: str) -> None:
     df = load_telemetry(filepath)
-    print(df.head())
+    summary = summarise_by_turbine(df)
+    print(summary)
 
 
 if __name__ == "__main__":
