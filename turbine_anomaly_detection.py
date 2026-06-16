@@ -15,9 +15,15 @@ import pandas as pd
 TEMP_THRESHOLD_C = 85.0
 VIBRATION_THRESHOLD_MM_S = 15.0
 
+def load_telemetry(filepath: str) -> pd.DataFrame:
+    """Load telemetry data from either a CSV or an Excel file."""
+    if filepath.lower().endswith((".xlsx", ".xls")):
+        return pd.read_excel(filepath)
+    return pd.read_csv(filepath)
 
 def main(filepath: str) -> None:
-    pass
+    df = load_telemetry(filepath)
+    print(df.head())
 
 
 if __name__ == "__main__":
