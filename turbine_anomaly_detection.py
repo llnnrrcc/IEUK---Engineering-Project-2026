@@ -29,9 +29,16 @@ def summarise_by_turbine(df: pd.DataFrame) -> pd.DataFrame:
         reading_count=("temperature_c", "count"),
     ).round(2)
 
+def flag_anomalies(summary: pd.DataFrame) -> pd.DataFrame:
+    """Mark turbines that breach either the temperature or vibration rule."""
+    summary["temp_anomaly"] = summary["avg_temperature_c"] > TEMP_THRESHOLD_C
+    summary["vibration_anomaly"] = summary["max_vibration_mm_s"] > VIBRATION_THRESHOLD_MM_S
+    summary["requires_maintenance"] = summary["temp_anomaly"] | summary["vibration_anomaly"]
+    return summary
+
 def main(filepath: str) -> None:
     df = load_telemetry(filepath)
-    summary = summarise_by_turbine(df)
+    summary = flag_anomalies(summarise_by_turbine(df))
     print(summary)
 
 
