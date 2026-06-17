@@ -58,6 +58,4 @@ storage (Amazon Timestream) for live dashboards, and cold storage
 
 ## Engineering Report
 
-See [`engineering_report.md`](./engineering_report.md) for the full
-write-up covering findings, architecture justification, and a cost
-optimisation strategy.
+The full report is available here: [Engineering Report (Google Drive)](https://drive.google.com/file/d/1eYMdZHQI4l2Il-j-icOawvphu--tCCsL/view?usp=share_link) 
