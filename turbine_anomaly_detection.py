@@ -37,7 +37,15 @@ def flag_anomalies(summary: pd.DataFrame) -> pd.DataFrame:
     return summary
 
 def main(filepath: str) -> None:
-    df = load_telemetry(filepath)
+    try:
+        df = load_telemetry(filepath)
+    except FileNotFoundError:
+        print(f"Error: could not find a file at '{filepath}'. Check the path and try again.")
+        sys.exit(1)
+    except (ValueError, UnicodeDecodeError):
+        print(f"Error: '{filepath}' could not be read as a CSV or Excel file.")
+        sys.exit(1)
+
     summary = flag_anomalies(summarise_by_turbine(df))
 
     print("Turbine Health Summary")
