@@ -46,6 +46,12 @@ def main(filepath: str) -> None:
         print(f"Error: '{filepath}' could not be read as a CSV or Excel file.")
         sys.exit(1)
 
+    required_columns = {"turbine_id", "temperature_c", "vibration_mm_s"}
+    missing = required_columns - set(df.columns)
+    if missing:
+        print(f"Error: the data is missing required column(s): {', '.join(missing)}")
+        sys.exit(1)
+
     summary = flag_anomalies(summarise_by_turbine(df))
 
     print("Turbine Health Summary")
