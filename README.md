@@ -20,7 +20,7 @@ engineering report.
 - `Dockerfile` — containerises the script
 - `.dockerignore` — excludes unnecessary files from the Docker build
 - `telemetry_data.xlsx` — sample 24-hour telemetry data
-- `architecture-diagram.png` — proposed real-time cloud architecture
+- `architecture-diagram.jpg` — proposed real-time cloud architecture
 - `engineering_report.md` — findings, architecture justification, and cost optimisation strategy
 
 ## Findings
