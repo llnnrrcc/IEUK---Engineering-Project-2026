@@ -52,6 +52,10 @@ def main(filepath: str) -> None:
         print(f"Error: the data is missing required column(s): {', '.join(missing)}")
         sys.exit(1)
 
+    if df.empty:
+        print("Error: the data file contains no rows to analyse.")
+        sys.exit(1)
+
     summary = flag_anomalies(summarise_by_turbine(df))
 
     print("Turbine Health Summary")
