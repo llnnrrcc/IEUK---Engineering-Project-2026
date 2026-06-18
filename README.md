@@ -54,3 +54,10 @@ which buffers spikes so no data is lost. A stream processor (AWS Lambda)
 then applies the anomaly rules in real time. Results split into hot
 storage (Amazon Timestream) for live dashboards, and cold storage
 (Amazon S3) for cheap long-term archiving and trend analysis.
+
+## References
+
+- [AWS Kinesis documentation](https://docs.aws.amazon.com/kinesis/)
+- [AWS Lambda documentation](https://docs.aws.amazon.com/lambda/)
+- [Amazon Timestream documentation](https://docs.aws.amazon.com/timestream/)
+- [Docker documentation](https://docs.docker.com/)
