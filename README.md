@@ -55,7 +55,3 @@ which buffers spikes so no data is lost. A stream processor (AWS Lambda)
 then applies the anomaly rules in real time. Results split into hot
 storage (Amazon Timestream) for live dashboards, and cold storage
 (Amazon S3) for cheap long-term archiving and trend analysis.
-
-## Engineering Report
-
-The full report is available here: [Engineering Report (Google Drive)](https://drive.google.com/file/d/1eYMdZHQI4l2Il-j-icOawvphu--tCCsL/view?usp=share_link) 
